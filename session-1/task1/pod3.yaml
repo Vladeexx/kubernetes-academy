@@ -3,8 +3,6 @@ kind: Pod
 metadata:
   namespace: task1
   name: pod2
-  labels:
-    app: deploy1
 spec:
   containers:
   - name: container2
