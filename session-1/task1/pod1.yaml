@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: container1
-    image: kennethreitz/httpbin
+    image: vladex007/vladex007repository:latest
     ports:
       - containerPort: 8081
         
