@@ -10,6 +10,6 @@ spec:
   - name: container1
     image: vladex007/vladex007repository:latest
     ports:
-      - containerPort: 8081
+      - containerPort: 3001
         
   
