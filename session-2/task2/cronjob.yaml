@@ -3,12 +3,15 @@ kind: CronJob
 metadata:
   namespace: task2
   name: hello
-  labels: 
-    labelcron: cronjob
+
 spec:
-  schedule: "* * * * *"
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
+     template:
+       metadata:
+        labels:
+         cj2job: cronjob
       template:
         spec:
           containers:
