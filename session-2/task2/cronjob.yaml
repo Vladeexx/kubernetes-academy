@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - date; echo Hello from the Kubernetes cluster; RUN apt-get update && apt-get install -y; curl service
+            - date; echo Hello from the Kubernetes cluster; apt-get update && apt-get install curl -y; curl service
           restartPolicy: OnFailure
