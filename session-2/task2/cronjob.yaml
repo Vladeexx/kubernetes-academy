@@ -3,6 +3,8 @@ kind: CronJob
 metadata:
   namespace: task2
   name: hello
+  labels: 
+    labelcron: cronjob
 spec:
   schedule: "* * * * *"
   jobTemplate:
