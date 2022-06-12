@@ -9,7 +9,7 @@ spec:
   ports:
     - name: protocol1   # channel 1 on service
       protocol: TCP
-      port: 80
+      port: 81
       targetPort: 3001
 
     - name: protocol2  # channel 2 on service
