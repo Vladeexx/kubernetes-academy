@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
           - name: hello
-            image: alpine:3.7
+            image: alpine:latest
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
