@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - date; echo Hello from the Kubernetes cluster; 
+            - date; echo Hello from the Kubernetes cluster; "apk --no-cache add curl; while true; do sleep 60; curl 'serice'; done" 
           restartPolicy: OnFailure
