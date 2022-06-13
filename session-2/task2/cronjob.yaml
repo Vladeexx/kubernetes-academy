@@ -13,8 +13,8 @@ spec:
           cjob: cronjob
         spec:
           containers:
-          - name: hello
-            image: busybox:1.28
+          - name: container4cjob
+            image: nginx
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
