@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - date; echo Hello from the Kubernetes cluster; curl service; curl service:81;
+            - date; echo Hello from the Kubernetes cluster; curl service; curl service:81; >> ./logs.yaml;
           restartPolicy: OnFailure
