@@ -17,25 +17,37 @@ spec:
     spec:
       containers:
 
-      - name: container1           #  container 1
+      - name: container1                #  container 1
         image: nginx
         ports:
         - containerPort: 3001
+        - mountPath: "/shared-folder"
+          name: shared-volume
 
       - name: container2                #  container 2
         image: nginx
         ports:
         - containerPort: 80
+        - mountPath: "/shared-folder"
+          name: shared-volume
+
 
       - name: container3                #  container 3 
         image: nginx
         ports:
         - containerPort: 3007
+        - mountPath: "/shared-folder"
+          name: shared-volume
 
-      - name: container3                #  container 3 
+      - name: container3                #  container 4 
         image: nginx
         ports:
         - containerPort: 3009
+
+      volumes:
+      - name: shared-volume
+        emptyDir: {}
+
 
 
 ---
