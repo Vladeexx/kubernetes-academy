@@ -21,6 +21,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 3001
+        volumeMounts:
         - mountPath: "/shared-folder"
           name: shared-volume
 
@@ -28,6 +29,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+        volumeMounts:
         - mountPath: "/shared-folder"
           name: shared-volume
 
@@ -36,6 +38,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 3007
+        volumeMounts:
         - mountPath: "/shared-folder"
           name: shared-volume
 
