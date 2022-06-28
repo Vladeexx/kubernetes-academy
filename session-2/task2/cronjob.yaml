@@ -4,7 +4,7 @@ metadata:
   namespace: task2
   name: hello
 spec:
- #schedule: "* * * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
@@ -20,4 +20,4 @@ spec:
             - /bin/sh
             - -c
             - date; echo Hello from the Kubernetes cluster; curl service; curl service:81; 
-          restartPolicy: OnFailure
+          restartPolicy: Never
