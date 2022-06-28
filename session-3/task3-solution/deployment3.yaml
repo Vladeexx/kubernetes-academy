@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: task3
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1         # replica
+  selector:
+    matchLabels:
+      app: nginx
+  template:           # Pod         
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+
+      - name: container1           #  container 1
+        image: nginx
+        ports:
+        - containerPort: 3001
+
+      - name: container2                #  container 2
+        image: nginx
+        ports:
+        - containerPort: 80
+
+      - name: container3                #  container 3 
+        image: nginx
+        ports:
+        - containerPort: 3007
+
+      - name: container3                #  container 3 
+        image: nginx
+        ports:
+        - containerPort: 3009
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: task3
+  name: service3
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: protocol1   # channel 1 on service
+      protocol: TCP
+      port: 81
+      targetPort: 3001
+
+    - name: protocol2  # channel 2 on service
+      protocol: TCP
+      port: 80
+      targetPort: 80
+
+    - name: protocol3  # channel 3 on service
+      protocol: TCP
+      port: 82
+      targetPort: 3007
+
+    - name: protocol4  # channel 4 on service
+      protocol: TCP
+      port: 83
+      targetPort: 3009
