@@ -42,7 +42,7 @@ spec:
         - mountPath: "/shared-folder"
           name: shared-volume
 
-      - name: container3                #  container 4 
+      - name: container4               #  container 4 
         image: nginx
         ports:
         - containerPort: 3009
