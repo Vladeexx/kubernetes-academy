@@ -15,25 +15,34 @@ spec:
       labels:
         app: nginx
     spec:
-      containers:
+      containers:    
 
       - name: container1           # 1st container
         image: vladex007/vladex007repository:latest
         ports:
         - containerPort: 3001
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        volumeMounts:
+          - name: config-vol
+            mountPath: /shared-folder
 
       - name: container2                # 2nd container
         image: nginx:1.14.2
         ports:
         - containerPort: 80
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        volumeMounts:
+          - name: config-vol
+            mountPath: /shared-folder
 
       - name: container3                # 2nd container
         image: nginx:1.14.2
         ports:
         - containerPort: 81
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        volumeMounts:
+          - name: config-vol
+            mountPath: /shared-folder
 
       - name: container4                # 2nd container
         image: nginx:1.14.2
@@ -41,7 +50,9 @@ spec:
         - containerPort: 83
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
 
-
+      volumes:
+      - name: config-vol
+        emptyDir: {}  
 
 ---
 
