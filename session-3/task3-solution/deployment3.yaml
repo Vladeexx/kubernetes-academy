@@ -44,6 +44,9 @@ spec:
           - name: config-vol
             mountPath: /shared-folder
 
+          - name: mypd
+            mountPath: /persist-data
+
       - name: container4                # 2nd container
         image: nginx
         ports:
@@ -52,7 +55,11 @@ spec:
 
       volumes:
       - name: config-vol
-        emptyDir: {}  
+        emptyDir: {} 
+    
+      - name: mypd
+        persistentVolumeClaim:
+          claimName: task-pv-claim 
 
 ---
 
