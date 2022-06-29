@@ -18,7 +18,7 @@ spec:
       containers:    
 
       - name: container1           # 1st container
-        image: vladex007/vladex007repository:latest
+        image: nginx
         ports:
         - containerPort: 3001
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
@@ -27,7 +27,7 @@ spec:
             mountPath: /shared-folder
 
       - name: container2                # 2nd container
-        image: nginx:1.14.2
+        image: nginx
         ports:
         - containerPort: 80
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
@@ -36,18 +36,18 @@ spec:
             mountPath: /shared-folder
 
       - name: container3                # 2nd container
-        image: nginx:1.14.2
+        image: nginx
         ports:
-        - containerPort: 81
+        - containerPort: 3007
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
         volumeMounts:
           - name: config-vol
             mountPath: /shared-folder
 
       - name: container4                # 2nd container
-        image: nginx:1.14.2
+        image: nginx
         ports:
-        - containerPort: 83
+        - containerPort: 3009
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
 
       volumes:
@@ -84,3 +84,5 @@ spec:
       protocol: TCP
       port: 83
       targetPort: 3009
+
+
