@@ -17,11 +17,11 @@ spec:
     spec:
       containers:    
 
-      - name: container1           # 1st container
+      - name: container1                 # 1st container
         image: nginx
         ports:
         - containerPort: 3001
-        command: ['sh', '-c', 'echo "ola amigos  from container 1" >> /shared-folder/container1.txt; sleep 36000']
+        command: ['sh', '-c', 'echo "ola amigos  from container 1" >> /shared-folder/container1.txt; sleep 50000']
  
      #  command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
         volumeMounts:
@@ -32,12 +32,12 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
-        command: ['sh', '-c', 'echo "container 2 wrote it!" >> /shared-folder/container1.txt; sleep 36000']
+        command: ['sh', '-c', 'echo "container 2 wrote it!" >> /shared-folder/container1.txt; sleep 50000']
         volumeMounts:
           - name: config-vol
             mountPath: /shared-folder
 
-      - name: container3                # 2nd container
+      - name: container3                # 3rd container
         image: nginx
         ports:
         - containerPort: 3007
@@ -49,11 +49,11 @@ spec:
           - name: mypd
             mountPath: /persist-data
 
-      - name: container4                # 2nd container
+      - name: container4                # 4th container
         image: nginx
         ports:
         - containerPort: 3009
-        command: ['sh', '-c', 'cat /persist-data/container1.txt  && sleep 36000']
+        command: ['sh', '-c', 'cat /persist-data/container1.txt  && sleep 50000']
         volumeMounts:
           - name: mypd
             mountPath: /persist-data
