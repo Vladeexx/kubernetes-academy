@@ -41,7 +41,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 3007
-        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        command: ['sh', '-c', 'mv /shared-folder/container1.txt /persist-data && sleep 50000']
         volumeMounts:
           - name: config-vol
             mountPath: /shared-folder
@@ -53,7 +53,10 @@ spec:
         image: nginx
         ports:
         - containerPort: 3009
-        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        command: ['sh', '-c', 'cat /persist-data/container1.txt  && sleep 36000']
+        volumeMounts:
+          - name: mypd
+            mountPath: /persist-data
 
       volumes:
       - name: config-vol
