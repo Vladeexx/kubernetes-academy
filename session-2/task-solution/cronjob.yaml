@@ -16,4 +16,4 @@ spec:
             - /bin/sh
             - -c
             - curl svc1 && curl svc1:3001
-          restartPolicy: OnFailure
+          restartPolicy: Never #OnFailure
