@@ -4,16 +4,16 @@ metadata:
   namespace: task3
   name: nginx-deployment
   labels:
-    app: nginx
+    app: nginx # This label is not mandatory 
 spec:
   replicas: 3         # replica
   selector:
     matchLabels:
-      app: nginx
+      app: nginx                        # **** Replica label need's to match Pod label
   template:           # Pod         
     metadata:
       labels:
-        app: nginx
+        app: nginx                      # **** Pod label
     spec:
       containers:    
 
