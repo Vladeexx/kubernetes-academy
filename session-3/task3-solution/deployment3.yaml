@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: nginx                        # **** Replica label need's to match Pod label
-  template:           # Pod         
+  template:           # Pod level         
     metadata:
       labels:
         app: nginx                      # **** Pod label
