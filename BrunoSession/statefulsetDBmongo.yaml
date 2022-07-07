@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: brunospace
-  name: service4
+  name: label4
 spec:
   selector:
     app: app1
