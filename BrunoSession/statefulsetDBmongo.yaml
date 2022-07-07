@@ -7,7 +7,7 @@ metadata:
   namespace: brunospace
   name: bruno-mongodb-deployment
   labels:
-    app: app1 
+    app: bronx 
 spec:
   serviceName: "service4"
   replicas: 3         # replica
