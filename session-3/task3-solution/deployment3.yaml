@@ -23,7 +23,6 @@ spec:
         - containerPort: 3001
         command: ['sh', '-c', 'echo "ola amigos  from container 1" >> /shared-folder/container1.txt; sleep 50000']
  
-     #  command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
         volumeMounts:
           - name: config-vol #**
             mountPath: /shared-folder
