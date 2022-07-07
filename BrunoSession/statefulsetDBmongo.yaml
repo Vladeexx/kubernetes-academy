@@ -9,8 +9,8 @@ metadata:
   labels:
     app: bronx 
 spec:
-  serviceName: "service4"
-  replicas: 3         # replica
+  serviceName: "service4"    # connecting with servise using "real service name"
+  replicas: 3       
   selector:
     matchLabels:
       app: app2                        # **** Replica label need's to match Pod label

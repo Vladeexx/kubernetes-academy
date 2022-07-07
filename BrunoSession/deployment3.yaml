@@ -50,7 +50,7 @@ metadata:
   name: service4
 spec:
   selector:
-    app: app1           # connection label for service
+    app: bronx           # connection label for service
   ports:
     - name: protocol1   # channell 1 on service for mongodB connection
       protocol: TCP
