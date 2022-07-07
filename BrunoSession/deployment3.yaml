@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: bronx                        # **** Replica label need's to match Pod label
-  template:           # Pod level         
+  template: #********** Pod level         
     metadata:
       labels:
         app: bronx                      # **** Pod label
@@ -26,10 +26,46 @@ spec:
           - name: mypd                          
             mountPath: /persist-data
 
+      - name: side-container                 # 1st container
+        image: nginx
+        ports:
+        - containerPort: 80
+
+        volumeMounts:
+          - name: mypd                          
+            mountPath: /persist-data
+
+
       volumes:       #**************** Volume
       - name: mypd                              
         persistentVolumeClaim:
           claimName: pv-claim-002
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: brunospace
+  name: myservice4
+spec:
+  selector:
+    app: app1           # connection label for service
+  ports:
+    - name: protocol1   # channell 1 on service for mongodB connection
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+    - name: protocol2   # channell 2 on service for NodeJS app connection
+      protocol: TCP
+      port: 80
+      targetPort: 80
+ 
+    - name: protocol3   # channell 3 on service for Nginx-sidecontainer app connection
+      protocol: TCP
+      port: 3001
+      targetPort: 3001
         
 
 
