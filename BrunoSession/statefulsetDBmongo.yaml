@@ -7,11 +7,15 @@ spec:
   selector:
     app: app1
   ports:
-    - name: protocol1   # channel 1 on service
+    - name: protocol1   # channell 1 on service
       protocol: TCP
       port: 27017
       targetPort: 27017
-
+ 
+    - name: protocol2   # channell 2 on service
+      protocol: TCP
+      port: 3001
+      targetPort: 3001
 
 ---
 apiVersion: apps/v1
