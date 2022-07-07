@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: brunospace
-  name: label4
+  name: myservice
 spec:
   selector:
     app: app1
@@ -20,7 +20,7 @@ metadata:
   namespace: brunospace
   name: bruno-mongodb-deployment
   labels:
-    app: app2 # This label is not mandatory 
+    app: app1 
 spec:
   serviceName: "service4"
   replicas: 3         # replica
