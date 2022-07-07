@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: brunospace
+  name: service4
+spec:
+  selector:
+    app: app1
+  ports:
+    - name: protocol1   # channel 1 on service
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: brunospace
+  name: bruno-mongodb-deployment
+  labels:
+    app: app2 # This label is not mandatory 
+spec:
+  serviceName: "service4"
+  replicas: 3         # replica
+  selector:
+    matchLabels:
+      app: app2                        # **** Replica label need's to match Pod label
+  template:           # Pod level         
+    metadata:
+      labels:
+        app: app2                      # **** Pod label
+    spec:
+      containers:    
+
+      - name: container2                 # 1st container
+        image: bitnami/mongodb
+        ports:
+        - containerPort: 27017

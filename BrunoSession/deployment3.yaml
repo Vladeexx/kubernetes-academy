@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: brunospace
+  name: bruno-deployment
+  labels:
+    app: app1 # This label is not mandatory 
+spec:
+  replicas: 3         # replica
+  selector:
+    matchLabels:
+      app: bronx                        # **** Replica label need's to match Pod label
+  template:           # Pod level         
+    metadata:
+      labels:
+        app: bronx                      # **** Pod label
+    spec:
+      containers:    
+
+      - name: container1                 # 1st container
+        image: brunoteleginski/nodejs-application
+        ports:
+        - containerPort: 3001
+
+
+        
+ 
+
+---
+
+
+
+
