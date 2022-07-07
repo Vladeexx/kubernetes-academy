@@ -22,7 +22,14 @@ spec:
         ports:
         - containerPort: 3001
 
+        volumeMounts:
+          - name: mypd                          
+            mountPath: /persist-data
 
+      volumes:       #**************** Volume
+      - name: mypd                              
+        persistentVolumeClaim:
+          claimName: pv-claim-002
         
 
 

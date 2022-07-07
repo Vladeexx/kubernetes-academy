@@ -4,7 +4,7 @@ metadata:
   namespace: task3
   name: nginx-deployment
   labels:
-    app: nginx # This label is not mandatory 
+    app: nginx 
 spec:
   replicas: 3         # replica
   selector:
