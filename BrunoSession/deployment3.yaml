@@ -21,6 +21,7 @@ spec:
         image: brunoteleginski/nodejs-application
         ports:
         - containerPort: 3001
+       # command: ['sh', '-c', 'mv /var/www/html/logs/application.log /persist-data && sleep 50000']
 
         volumeMounts:
           - name: mypd                          
