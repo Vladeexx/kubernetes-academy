@@ -1,74 +1,73 @@
+#SERVICE- NODE API
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-app-service
+  labels:
+    app: nodejs-app
+  namespace: brunospace
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3001
+      targetPort: 3001
+  selector:
+    app: nodejs-app
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: brunospace
-  name: bruno-deployment
+  name: nodejs-app
   labels:
-    app: bronx # This label is to connect service
+    app: nodejs-app
 spec:
-  replicas: 3         # replica
+  replicas: 1
   selector:
     matchLabels:
-      app: bronx                        # **** Replica label need's to match Pod label
-  template: #********** Pod level         
+      app: nodejs-app
+  template:
     metadata:
       labels:
-        app: bronx                      # **** Pod label
+        app: nodejs-app
     spec:
-      containers:    
+      
+      volumes:
+      - name: shared-volume
+        emptyDir: {}
 
-      - name: container1                 # 1st container
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "touch /var/www/html/logs/application.log"]
+        volumeMounts:
+        - name: shared-volume
+          mountPath: "/var/www/html/logs"
+
+      containers:
+      - name: nodejs-app
         image: brunoteleginski/nodejs-application
+        imagePullPolicy: Always
         ports:
         - containerPort: 3001
-       # command: ['sh', '-c', 'mv /var/www/html/logs/application.log /persist-data && sleep 50000']
-
+        env:
+        - name: MONGODB_HOST
+          value: "mongo-db"
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_USER
+          value: "root"
+        - name: MONGODB_PASS
+          value: "1234"
         volumeMounts:
-          - name: mypd                          
-            mountPath: /persist-data
-
-      - name: side-container                 # 1st container
-        image: nginx
-        ports:
-        - containerPort: 80
-
+        - name: shared-volume
+          mountPath: "/var/www/html/logs"
+      
+      - name: sidecar
+        image: busybox
+        args: [/bin/sh, -c, 'tail -n+1 -F /logs/application.log']
         volumeMounts:
-          - name: mypd                          
-            mountPath: /persist-data
-
-
-      volumes:       #**************** Volume
-      - name: mypd                              
-        persistentVolumeClaim:
-          claimName: pv-claim-002
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: brunospace
-  name: service4
-spec:
-  selector:
-    app: bronx           # connection label for service
-  ports:
-    - name: protocol1   # channell 1 on service for mongodB connection
-      protocol: TCP
-      port: 27017
-      targetPort: 27017
-
-    - name: protocol2   # channell 2 on service for NodeJS app connection
-      protocol: TCP
-      port: 80
-      targetPort: 80
- 
-    - name: protocol3   # channell 3 on service for Nginx-sidecontainer app connection
-      protocol: TCP
-      port: 3001
-      targetPort: 3001
-        
-
-
-
-
+        - name: shared-volume
+          mountPath: "/logs"

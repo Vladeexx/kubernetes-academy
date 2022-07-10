@@ -1,27 +1,47 @@
-
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-db-service
+  namespace: brunospace
+  labels:
+    app: mongo-db
+spec:
+  type: ClusterIP
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    app: mongo-db
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: mongo
   namespace: brunospace
-  name: bruno-mongodb-deployment
-  labels:
-    app: bronx 
 spec:
-  serviceName: "service4"    # connecting with servise using "real service name"
-  replicas: 3       
+  serviceName: "mongo-db-service"
+  replicas: 1
   selector:
     matchLabels:
-      app: app2                        # **** Replica label need's to match Pod label
-  template:           # Pod level         
+      app: mongo-db
+  template:
     metadata:
       labels:
-        app: app2                      # **** Pod label
+        app: mongo-db
     spec:
-      containers:    
-
-      - name: container-mongodb                 # 1st container
-        image: bitnami/mongodb
-        ports:
-        - containerPort: 27017
+      containers:
+        - name: mongo-db
+          image: "bitnami/mongodb:latest"
+          env:
+            - name: "MONGODB_ROOT_PASSWORD"
+              value: "1234"
+          ports:
+            - containerPort: 27017
+              name: mongo
+          volumeMounts:
+            - mountPath: /data/mongoaz
+              name: mongo-db-persistent
+      volumes:
+        - name: mongo-db-persistent
+          persistentVolumeClaim:
+            claimName: pvc-mongoclaim
