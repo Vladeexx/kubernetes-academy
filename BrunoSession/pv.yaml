@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  namespace: brunospace
   name: task-pv-volume002
   labels:
     type: local
