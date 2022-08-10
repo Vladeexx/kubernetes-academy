@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vladexconfigmap
+data:
+  configuration.json: |
+    {
+      
+      "APP_USERNAME": "usernameTM87",
+      
+      "APP_PASSWORD": "password123456"
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-example-session-4-vladex
+spec:
+  containers:
+  - name: vladexcontainer
+    image: brunoteleginski/node-session-4-task
+    volumeMounts:
+    - name: vol2
+      mountPath: "/var/www/html"
+      readOnly: true
+    ports:
+    - containerPort: 3001
+  volumes:
+  - name: vol2
+    configMap:
+      name: vladexconfigmap

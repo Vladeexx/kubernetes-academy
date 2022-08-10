@@ -6,7 +6,7 @@ data:
   config.json: |
     {
       "sentia": "test",
-      "test": true
+      "test": true,
     }
 ---
 apiVersion: v1
