@@ -3,12 +3,11 @@ kind: ConfigMap
 metadata:
   name: vladexconfigmap
 data:
-  config.json: |
-    {
-      
-      "APP_USERNAME": "usernameTM87",
-      
-      "APP_PASSWORD": "password123456"
+  configuration.json: |
+    {  
+    "yourname": "Vladimir",
+    "surname": "Pavicic",
+    "town": "Rotterdam"
     }
 ---
 apiVersion: v1
@@ -19,9 +18,23 @@ spec:
   containers:
   - name: vladexcontainer
     image: brunoteleginski/node-session-4-task
+    env:
+      - name: APP_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: vladexsecret
+            key: username
+            optional: false
+
+      - name: APP_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: vladexsecret
+            key: password
+            optional: false
     volumeMounts:
     - name: vol2
-      mountPath: "/usr/src/app/config"
+      mountPath: "/var/www/html/configuration"
       readOnly: true
     ports:
     - containerPort: 3001
