@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: vladexconfigmap
 data:
-  configuration.json: |
+  config.json: |
     {
       
       "APP_USERNAME": "usernameTM87",
@@ -21,7 +21,7 @@ spec:
     image: brunoteleginski/node-session-4-task
     volumeMounts:
     - name: vol2
-      mountPath: "/var/www/html"
+      mountPath: "/usr/src/app/config"
       readOnly: true
     ports:
     - containerPort: 3001
