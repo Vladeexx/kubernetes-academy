@@ -26,3 +26,10 @@ volumeName: main-volume
  
 
 check the sidecar container’s log and store it’s output under /tmp/output.txt
+
+
+
+AUTOCOMPLETE COMMAND
+
+autoload -Uz compinit
+compinit
